@@ -1,37 +1,43 @@
 /////////////// DEPENDENCIES
 const express = require("express");
 const ROUTER = express.Router();
+const mongoose = require("mongoose");
 
+
+//////////////////////////////
+/////////////// MODELS
+//////////////////////////////
+const cspschema = require("../models/ccmanagerschema.js")
+
+
+//////////////////////////////
+/////////////// ROUTES
+//////////////////////////////
+
+///////////////  seed route  ///////////////
+
+
+///////////////  index route ///////////////
 ROUTER.get("/", (req, res)  => {
     res.send("Ready to start the Credit Card Manager project!");
 })
 
-/////////////// MODELS
+///////////////  new route   ///////////////
 
 
-/////////////// ROUTES
-
-// seed route
+/////////////// create route ///////////////
 
 
-// index route
+///////////////  show route  ///////////////
 
 
-// new route
-
-// create route
+///////////////  edit route  ///////////////
 
 
-// show route
+/////////////// update route ///////////////
 
 
-// edit route
-
-
-// update route
-
-
-// delete route
+/////////////// delete route ///////////////
 
 
 module.exports = ROUTER;

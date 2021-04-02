@@ -1,0 +1,25 @@
+{
+  "name": "ccmanager-api",
+  "version": "1.0.0",
+  "description": "The Credit Card Manager is an app that will allow a user to enter credit card information. It features a tool to project accelerated payments and gauge the benefits of eliminating credit-card debt by showing the savings in interest charges that the user can realize by accelerating payments.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/w1arenas/ccmanager-api.git"
+  },
+  "author": "Walter Arenas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/w1arenas/ccmanager-api/issues"
+  },
+  "homepage": "https://github.com/w1arenas/ccmanager-api#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.3"
+  }
+}
