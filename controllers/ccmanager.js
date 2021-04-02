@@ -19,15 +19,7 @@ const Card = require("../models/ccmanagerschema.js")
 ///////////////  seed route  ///////////////
 
 
-///////////////  index route ///////////////
-CREDITCARD.get("/ccmanager", (req, res)  => {
-    console.log("I have hit the /ccmanager index")
-    res.send("Ready to start the Credit Card Manager project!");
-    // Card.find({}, (error, allCards) => {
-    //     res.send(allCards)
-    // })
 
-})
 
 ///////////////  new route   ///////////////
 CREDITCARD.get("/ccmanager/new", (req, res) => {
@@ -41,10 +33,23 @@ CREDITCARD.post('/', (req, res) => {
     if (error) {
         res.status(400).json({ error: error.message })
     };
-    console.log("Testing equipment creation route:", createdCard)
+    console.log("Testing card creation route:", createdCard)
     res.status(200).send(createdCard) 
     });
 });
+
+
+///////////////  index route ///////////////
+CREDITCARD.get("/ccmanager", (req, res)  => {
+    console.log("I have hit the /ccmanager index")
+    // res.send("Ready to start the Credit Card Manager project!");
+    Card.find({}, (err, foundCard) => {
+        if (err) {
+            res.status(400).json({ error: err.message });
+        };
+        res.status(200).json(foundCard);
+    });
+})
 
 ///////////////  show route  ///////////////
 
@@ -61,27 +66,27 @@ CREDITCARD.post('/', (req, res) => {
 
 
 /////////////// ITEM CREATION - testing
-const myFirstCardEntry = {
-    cardName: "Capital One Visa",
-    firstNumInAcct: 3,
-    lastFourAcctNums: 5555,
-    bank: "ING Bank",
-    bankPhone: "555-555-5555",
-    bankAddress: "123 Main St.",
-    creditLimit: 10000,
-    balance: 3500,
-    dueDate: 2021-04-15,
-    minimumPay: 150,
-    interest: 18,
-    comments: "I want to decrease my balance of this card"
-}
+// const myFirstCardEntry = {
+//     cardName: "Capital One Visa",
+//     firstNumInAcct: 3,
+//     lastFourAcctNums: 5555,
+//     bank: "ING Bank",
+//     bankPhone: "555-555-5555",
+//     bankAddress: "123 Main St.",
+//     creditLimit: 10000,
+//     balance: 3500,
+//     dueDate: 2021-04-15,
+//     minimumPay: 150,
+//     interest: 18,
+//     comments: "I want to decrease the balance of this card."
+// }
 
-Card.create(myFirstCardEntry, (error, cardItem) => {
-if (error) {
-    console.log(error)
-} else {
-    console.log(cardItem)
-}
-})
+// Card.create(myFirstCardEntry, (error, cardItem) => {
+// if (error) {
+//     console.log(error)
+// } else {
+//     console.log(cardItem)
+// }
+// })
 
 module.exports = CREDITCARD;
