@@ -1,48 +1,74 @@
-/////////////// DEPENDENCIES
+// ==============================================
+// DEPENDENCIES
+// ==============================================
 const express = require("express");
 const mongoose = require("mongoose");
 
 
-/////////////// GLOBAL CONFIGURATION
-const mongoURI = "mongodb://localhost:27017/" + "creditcards"
-const db = mongoose.connection;
+// ==============================================
+// SERVER CONFIGURATION
+// ==============================================
+const APP = express();
+const PORT = 3000;
+const DB_NAME = "cards"
+const MONGO_URI = "mongodb://localhost:27017/" + DB_NAME;
 
 
-/////////////// CONNECTION ERROR/SUCCESS
-db.on("error", (err) => console.log(err.message + "is Mongo not running"));
-db.on("connected", () => console.log("Mongo connected: " + mongoURI));
-db.on("disconnected", () => console.log("Mongo disconnected"));
+// ==============================================
+// CONTROLLERS
+// ==============================================
+const ccmanagerController = require("./controllers/ccmanager.js");
 
 
-/////////////// CONNECT TO MONGO
-mongoose.connect(mongoURI, {
+// ==============================================
+// MIDDLEWARE
+// ==============================================
+APP.use(ccmanagerController);
+APP.use(express.urlencoded({extended: true}));
+APP.use(express.json())
+APP.use(express.static("public"))
+
+
+// ==============================================
+// CONNECT TO MONGO
+// ==============================================
+mongoose.connect(MONGO_URI, {
     useFindAndModify: false,
     useNewUrlParser: true,
     useUnifiedTopology: true
-}, () => {
-    console.log("The connection with Mongo is established.")
 });
 
 
-/////////////// APP CONFIGURATION
-const APP = express();
-const PORT = 3000;
+// ==============================================
+// CONNECTION ERROR/SUCCESS
+// ==============================================
+const db = mongoose.connection;
+db.on("error", (err) => console.log(err.message + "is Mongo not running"));
+db.on("connected", () => console.log("The connection with Mongo has been established at: " + MONGO_URI));
+db.on("disconnected", () => console.log("Mongo disconnected"));
 
 
-/////////////// CONTROLLER LOGIC
-const collectionController = require("./controllers/ccmanager.js");
-
-
-/////////////// MIDDLEWARE
-APP.use(collectionController);
-
-
-/////////////// DATABASE CONFIGURATION
-
-
-/////////////// LISTENER
+// ==============================================
+// LISTENER
+// ==============================================
 APP.listen(PORT, () => {
     console.log("Listening to CCManager server on PORT: " + PORT);
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ==============================================
+// MONGO DISCONNECT
+// ==============================================
 setTimeout(() => { db.close(); }, 5000)
