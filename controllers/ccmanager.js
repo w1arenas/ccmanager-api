@@ -17,17 +17,7 @@ const Card = require("../models/ccmanagerschema.js")
 // ==============================================
 
 
-
-
-
-
-///////////////  NEW route   ///////////////
-CREDITCARD.get("/ccmanager/new", (req, res) => {
-    res.send("new")
-});
-
-
-/////////////// CREATE route ///////////////
+// /////////////// CREATE route ///////////////
 CREDITCARD.post('/', (req, res) => {
     Card.create(req.body, (error, createdCard) => {
     if (error) {
@@ -36,20 +26,23 @@ CREDITCARD.post('/', (req, res) => {
     console.log("Testing card creation route:", createdCard)
     res.status(200).send(createdCard) 
     });
+
 });
 
 
-///////////////  READ routes ///////////////
-CREDITCARD.get("/ccmanager/:id", (req, res) => {
-    Card.findOne({"_id": req.params.id}, (err, foundCard) => {
-        if (err) {
-            res.status(400).json({ error: err.message })
-        }
-        res.status(200).json(foundCard)
-    })
-})
+// curl -X POST -H "Content-Type: application/json" -d '{"cardName":"Diners Club", "firstNumInAcct":"9", "lastFourAcctNums":"0000", "bank":"Centurion Bank", "bankPhone":"800-888-8888", "bankAddress":"555 Magnolia Ct.", "creditLimit":"100000", "balance":"20000", "dueDate":"2021-04-30", "minimumPay":"2500", "interest":"12", "comments":"None"}' 'http://localhost:3003/ccmanager'
 
-CREDITCARD.get("/ccmanager", (req, res) => {
+// ///////////////  READ routes ///////////////
+// CREDITCARD.get("/:id", (req, res) => {
+//     Card.find({"_id": req.params.id}, (err, foundCard) => {
+//         if (err) {
+//             res.status(400).json({ error: err.message })
+//         }
+//         res.status(200).json(foundCard)
+//     })
+// })
+
+CREDITCARD.get("/", (req, res) => {
     Card.find({}, (err, foundCard) => {
         if (err) {
             res.status(400).json({ error: err.message });
@@ -59,21 +52,31 @@ CREDITCARD.get("/ccmanager", (req, res) => {
 });
 
 
-///////////////  edit route  ///////////////
 
+/////////////// UPDATE route ///////////////
+CREDITCARD.put('/:id', (req, res) => {
+    Card.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedCard) => {
+        if (err) {
+        res.status(400).json({ error: err.message })
+        }
+        res.status(200).json(updatedCard)
+    })
+    })
 
-/////////////// update route ///////////////
-
+// curl -X PUT -H "Content-Type: application/json" -d '{"cardName":"VISA"}' http://localhost:3003/ccmanager/606b2bed45fffdf03c52aaa3
 
 /////////////// DELETE route ///////////////
-// CREDITCARD.delete("/ccmanager/:id", (req, res) => {
-//     Card.findByIdAndRemove(req.params.id, (err, deletedCard) => {
-//         if (err) {
-//             res.status(400).json({ error: err.message});
-//         };
-//         res.status(200).json(deletedCard);
-//     });
-// });
+CREDITCARD.delete("/:id", (req, res) => {
+    Card.findByIdAndRemove(req.params.id, (err, deletedCard) => {
+        if (err) {
+            res.status(400).json({ error: err.message});
+        };
+        res.status(200).json(deletedCard);
+    });
+});
+
+// curl -X DELETE http://localhost:3003/ccmanager/606c6233e485f9224fc50192
+
 
 // ///////////////  SEEDING  ///////////////
 // CREDITCARD.get("/ccmanager/seed", async (req, res) => {

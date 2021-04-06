@@ -1,74 +1,41 @@
-// ==============================================
-// DEPENDENCIES
-// ==============================================
+// /////////////// DEPENDENCIES
 const express = require("express");
 const mongoose = require("mongoose");
+// const cors = require("cors");
 
-
-// ==============================================
-// SERVER CONFIGURATION
-// ==============================================
+// /////////////// APP CONFIGURATION
 const APP = express();
-const PORT = 3000;
-const DB_NAME = "cards"
-const MONGO_URI = "mongodb://localhost:27017/" + DB_NAME;
+const PORT = 3003;
+const DBNAME = 'cards';
+APP.use(express.json());
 
+// const whitelist = ["http://localhost:3000"]
+// const corsOptions = {
+//     origin: function (origin, callback) {
+//         if (whitelist.indexOf(origin) !== -1) {
+//             callback(null, true)
+//         } else {
+//             callback(new Error('Not allowed by CORS'))
+//         }
+//     }
+// }
 
-// ==============================================
-// CONTROLLERS
-// ==============================================
-const ccmanagerController = require("./controllers/ccmanager.js");
+// APP.use (cors(corsOptions))
 
+// /////////////// CONTROLLER LOGIC
+const ccmanagerController = require("./controllers/ccmanager.js")
 
-// ==============================================
-// MIDDLEWARE
-// ==============================================
-APP.use(ccmanagerController);
-APP.use(express.urlencoded({extended: true}));
-APP.use(express.json())
-APP.use(express.static("public"))
-
-
-// ==============================================
-// CONNECT TO MONGO
-// ==============================================
-mongoose.connect(MONGO_URI, {
-    useFindAndModify: false,
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+// /////////////// CONNECT TO MONGO
+mongoose.connect(`mongodb://localhost:27017/${DBNAME}`, { useNewUrlParser: true });
+mongoose.connection.once('open', () => {
+    console.log('Connected to mongoose...');
 });
 
-
-// ==============================================
-// CONNECTION ERROR/SUCCESS
-// ==============================================
-const db = mongoose.connection;
-db.on("error", (err) => console.log(err.message + "is Mongo not running"));
-db.on("connected", () => console.log("The connection with Mongo has been established at: " + MONGO_URI));
-db.on("disconnected", () => console.log("Mongo disconnected"));
+// /////////////// MIDDLEWARE
+APP.use("/ccmanager", ccmanagerController)
 
 
-// ==============================================
-// LISTENER
-// ==============================================
+// /////////////// LISTENER
 APP.listen(PORT, () => {
-    console.log("Listening to CCManager server on PORT: " + PORT);
+    console.log("Listening to CCManager on PORT: " + PORT)
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ==============================================
-// MONGO DISCONNECT
-// ==============================================
-setTimeout(() => { db.close(); }, 5000)
