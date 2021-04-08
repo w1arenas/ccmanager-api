@@ -13,8 +13,8 @@ const ccmanagerSchema = new Schema ({
     bankAddress: String,
     creditLimit: {type: Number, required: true},
     balance: {type: Number, required: true}, 
-    dueDate: {type: Date, required: true},
     minimumPay: {type: Number, required: true},
+    dueDate: {type: Date, required: true},
     interest: {type: Number, required: true},
     comments: String
 }, {timestamps: true});

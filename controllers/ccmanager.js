@@ -19,6 +19,7 @@ const Card = require("../models/ccmanagerschema.js")
 
 // /////////////// CREATE route ///////////////
 CREDITCARD.post('/', (req, res) => {
+    console.log(req.body)
     Card.create(req.body, (error, createdCard) => {
     if (error) {
         res.status(400).json({ error: error.message })
@@ -81,34 +82,34 @@ CREDITCARD.delete("/:id", (req, res) => {
 // ///////////////  SEEDING  ///////////////
 // CREDITCARD.get("/ccmanager/seed", async (req, res) => {
 //     Card.create([
-//         {
-//             cardName: "Capital One Visa",
-//             firstNumInAcct: 3,
-//             lastFourAcctNums: 5555,
-//             bank: "ING Bank",
-//             bankPhone: "555-555-5555",
-//             bankAddress: "123 Main St.",
-//             creditLimit: 10000,
-//             balance: 3500,
-//             dueDate: 2021-04-15,
-//             minimumPay: 150,
-//             interest: 18,
-//             comments: "I want to decrease the balance of this card first."
-//         },
-//         {
-//             cardName: "American Express",
-//             firstNumInAcct: 5,
-//             lastFourAcctNums: 9999,
-//             bank: "Centurion Bank",
-//             bankPhone: "555-555-5555",
-//             bankAddress: "123 Main St.",
-//             creditLimit: 20000,
-//             balance: 8000,
-//             dueDate: 2021-04-18,
-//             minimumPay: 300,
-//             interest: 14,
-//             comments: "I want to decrease the balance of this card second."
-//         },
+        // {
+        //     cardName: "Capital One Visa",
+        //     firstNumInAcct: 3,
+        //     lastFourAcctNums: 5555,
+        //     bank: "ING Bank",
+        //     bankPhone: "555-555-5555",
+        //     bankAddress: "123 Main St.",
+        //     creditLimit: 10000,
+        //     balance: 3500,
+        //     dueDate: 2021-04-15,
+        //     minimumPay: 150,
+        //     interest: 18,
+        //     comments: "I want to decrease the balance of this card first."
+        // },
+        // {
+        //     cardName: "American Express",
+        //     firstNumInAcct: 5,
+        //     lastFourAcctNums: 9999,
+        //     bank: "Centurion Bank",
+        //     bankPhone: "555-555-5555",
+        //     bankAddress: "123 Main St.",
+        //     creditLimit: 20000,
+        //     balance: 8000,
+        //     dueDate: 2021-04-18,
+        //     minimumPay: 300,
+        //     interest: 14,
+        //     comments: "I want to decrease the balance of this card second."
+        // },
 //     ]);
 // });
 
