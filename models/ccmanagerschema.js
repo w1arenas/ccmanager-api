@@ -19,7 +19,6 @@ const ccmanagerSchema = new Schema ({
     comments: String
 }, {timestamps: true});
 
-
 const Card = mongoose.model("Card", ccmanagerSchema);
 
 

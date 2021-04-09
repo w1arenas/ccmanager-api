@@ -34,14 +34,14 @@ CREDITCARD.post('/', (req, res) => {
 // curl -X POST -H "Content-Type: application/json" -d '{"cardName":"Diners Club", "firstNumInAcct":"9", "lastFourAcctNums":"0000", "bank":"Centurion Bank", "bankPhone":"800-888-8888", "bankAddress":"555 Magnolia Ct.", "creditLimit":"100000", "balance":"20000", "dueDate":"2021-04-30", "minimumPay":"2500", "interest":"12", "comments":"None"}' 'http://localhost:3003/ccmanager'
 
 // ///////////////  READ routes ///////////////
-// CREDITCARD.get("/:id", (req, res) => {
-//     Card.find({"_id": req.params.id}, (err, foundCard) => {
-//         if (err) {
-//             res.status(400).json({ error: err.message })
-//         }
-//         res.status(200).json(foundCard)
-//     })
-// })
+CREDITCARD.get("/:id", (req, res) => {
+    Card.find({"_id": req.params.id}, (err, foundCard) => {
+        if (err) {
+            res.status(400).json({ error: err.message })
+        }
+        res.status(200).json(foundCard)
+    })
+})
 
 CREDITCARD.get("/", (req, res) => {
     Card.find({}, (err, foundCard) => {
