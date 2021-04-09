@@ -16,7 +16,7 @@ const ccmanagerSchema = new Schema ({
     minimumPay: {type: Number, required: true},
     dueDate: {type: Date, required: true},
     interest: {type: Number, required: true},
-    comments: String
+    comments: String,
 }, {timestamps: true});
 
 const Card = mongoose.model("Card", ccmanagerSchema);
