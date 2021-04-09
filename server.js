@@ -28,7 +28,7 @@ const corsOptions = {
 //     }
 // }
 
-APP.use (cors(corsOptions))
+APP.use (cors())
 
 // /////////////// CONTROLLER LOGIC
 const ccmanagerController = require("./controllers/ccmanager.js")
