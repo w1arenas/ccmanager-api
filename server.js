@@ -9,16 +9,24 @@ const PORT = 3003;
 const DBNAME = 'cards';
 APP.use(express.json());
 
-const whitelist = ["http://localhost:3000", "https://limitless-brushlands-14241.herokuapp.com"]
-const corsOptions = {
-    origin: function (origin, callback) {
-        if (whitelist.indexOf(origin) !== -1) {
-            callback(null, true)
-        } else {
-            callback(new Error('Not allowed by CORS'))
-        }
-    }
+// const whitelist = ["http://localhost:3000", "https://limitless-brushlands-14241.herokuapp.com",]
+
+const corsOptions = {
+    origin: ['http://localhost:3000', "https://limitless-brushlands-14241.herokuapp.com"],
+    methods: 'GET,PUT,POST,DELETE,OPTIONS',
+    headers: 'Content-Type,Origin,X-Requested-With,Accept,Authorization',
+    credentials: true
 }
+
+// const corsOptions = {
+//     origin: function (origin, callback) {
+//         if (whitelist.indexOf(origin) !== -1) {
+//             callback(null, true)
+//         } else {
+//             callback(new Error('Not allowed by CORS'))
+//         }
+//     }
+// }
 
 APP.use (cors(corsOptions))
 
