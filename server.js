@@ -9,7 +9,7 @@ const PORT = 3003;
 const DBNAME = 'cards';
 APP.use(express.json());
 
-const whitelist = ["http://localhost:3000"]
+const whitelist = ["http://localhost:3000", "https://limitless-brushlands-14241.herokuapp.com"]
 const corsOptions = {
     origin: function (origin, callback) {
         if (whitelist.indexOf(origin) !== -1) {
