@@ -5,7 +5,7 @@ const cors = require("cors");
 
 // /////////////// APP CONFIGURATION
 const APP = express();
-const PORT = 3003;
+const PORT = process.env.PORT || 3003;
 const DBNAME = 'cards';
 APP.use(express.json());
 
