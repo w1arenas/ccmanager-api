@@ -26,7 +26,8 @@ APP.use (cors(corsOptions))
 const ccmanagerController = require("./controllers/ccmanager.js")
 
 // /////////////// CONNECT TO MONGO
-mongoose.connect(`mongodb://localhost:27017/${DBNAME}`, { useNewUrlParser: true });
+const MONGODB_URI = process.env.MONGODB_URI || `mongodb://localhost:27017/${DBNAME}`
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 mongoose.connection.once('open', () => {
     console.log('Connected to mongoose...');
 });
