@@ -21,6 +21,5 @@ const ccmanagerSchema = new Schema ({
 
 const Card = mongoose.model("Card", ccmanagerSchema);
 
-
 /////////////// Export the model to make it accessible in server.js
 module.exports = Card
