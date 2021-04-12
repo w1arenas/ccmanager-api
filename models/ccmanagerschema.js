@@ -14,7 +14,7 @@ const ccmanagerSchema = new Schema ({
     creditLimit: {type: Number, required: true},
     balance: {type: Number, required: true}, 
     minimumPay: {type: Number, required: true},
-    dueDate: {type: Date, required: true},
+    dueDate: {type: String, required: true},
     interest: {type: Number, required: true},
     comments: String,
 }, {timestamps: true});

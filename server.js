@@ -18,6 +18,7 @@ const corsOptions = {
     credentials: true
 }
 
+
 // const corsOptions = {
 //     origin: function (origin, callback) {
 //         if (whitelist.indexOf(origin) !== -1) {
