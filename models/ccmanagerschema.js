@@ -6,7 +6,6 @@ const Schema = mongoose.Schema
 /////////////// SCHEMA
 const ccmanagerSchema = new Schema ({
     cardName: {type: String, required: true},
-    firstNumInAcct: {type: Number, required: true},
     lastFourAcctNums: {type: Number, required: true},
     bank: String,
     bankPhone: String,
